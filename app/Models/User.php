@@ -29,6 +29,10 @@ class User extends Authenticatable
     public function verificationCode(): HasOne {
         return $this->hasOne(EmailVerificationCode::class);
     }
+    public function passwordResetCode(): HasOne
+    {
+        return $this->hasOne(PasswordResetCode::class);
+    }
     public function hasVerifiedEmail(): bool
     {
         return $this->email_verified_at !== null;

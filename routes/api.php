@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\EmailVerificationController;
+use App\Http\Controllers\Api\PasswordResetController;
 use App\Http\Controllers\Api\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -9,6 +10,8 @@ Route::prefix('auth')->group(function () {
     Route::post('register', [AuthController::class, 'register'])->middleware('throttle:auth');
     Route::post('login', [AuthController::class, 'login'])->middleware('throttle:login');
     Route::post('google', [AuthController::class, 'google'])->middleware('throttle:auth');
+    Route::post('forgot-password', [PasswordResetController::class, 'forgot'])->middleware('throttle:password');
+    Route::post('reset-password', [PasswordResetController::class, 'reset'])->middleware('throttle:password');
 });
 
 Route::middleware(['auth:sanctum', 'throttle:api'])->group(function () {
